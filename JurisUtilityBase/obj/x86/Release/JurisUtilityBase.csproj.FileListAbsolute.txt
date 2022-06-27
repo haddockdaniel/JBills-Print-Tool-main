@@ -1,0 +1,199 @@
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\JurisUtility.exe.config
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.ResolveComReference.cache
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\JurisUtility.exe.manifest
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\JurisUtility.application
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\JurisUtility.exe
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\JurisUtility.pdb
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\C1.C1Report.4.dll
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\C1.Win.C1Input.4.dll
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\C1.Win.C1Report.4.dll
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\Gizmox.Extensions.dll
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\Ionic.Zlib.dll
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\JurisAuthenticator.dll
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\JurisDBO21.dll
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\JurisIDef21.dll
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\JurisStr21.dll
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\JurisStr221.dll
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\bin\x86\Release\JurisSVR21.dll
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csprojResolveAssemblyReference.cache
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.UtilityBaseMain.resources
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.Properties.Resources.resources
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.SplashScreen.resources
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.GenerateResource.Cache
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\obj\x86\Release\JurisUtility.exe.manifest
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\obj\x86\Release\JurisUtility.application
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\obj\x86\Release\JurisUtility.exe
+C:\Utils\.Net Juris Utils\Juris Utility Base\JurisUtilityBase\obj\x86\Release\JurisUtility.pdb
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csprojAssemblyReference.cache
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.ResolveComReference.cache
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.PrinterDialog.resources
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.ReportDisplay.resources
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.UtilityBaseMain.resources
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.Properties.Resources.resources
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.SplashScreen.resources
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.GenerateResource.cache
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.CoreCompileInputs.cache
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JPS - McCabe Trust Fix.exe
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JPS - McCabe Trust Fix.pdb
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\JPS - McCabe Trust Fix.exe.config
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\JPS - McCabe Trust Fix.exe.manifest
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\JPS - McCabe Trust Fix.application
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\JPS - McCabe Trust Fix.exe
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\JPS - McCabe Trust Fix.pdb
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\C1.C1Report.4.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\C1.Win.C1Input.4.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\C1.Win.C1Report.4.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\Costura.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\Gizmox.Extensions.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\Ionic.Zlib.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\JurisAuthenticator.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\JurisDBO21.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\JurisIDef21.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\JurisStr21.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\JurisStr221.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\JurisSVR21.dll
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\bin\x86\Release\Costura.xml
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.Fody.CopyLocal.cache
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JPS - McCabe Trust Fix.exe.manifest
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JPS - McCabe Trust Fix.application
+D:\Projects\MCCabe Trust Ledger Fix\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.CopyComplete
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.AssemblyReference.cache
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.ResolveComReference.cache
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.PrinterDialog.resources
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.ReportDisplay.resources
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.UtilityBaseMain.resources
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.Properties.Resources.resources
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.SplashScreen.resources
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.GenerateResource.cache
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.CoreCompileInputs.cache
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.Fody.CopyLocal.cache
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\C1.C1Report.4.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\C1.Win.C1Input.4.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\C1.Win.C1Report.4.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\Costura.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\Gizmox.Extensions.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\Ionic.Zlib.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\JurisAuthenticator.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\JurisDBO21.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\JurisIDef21.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\JurisStr21.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\JurisStr221.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\JurisSVR21.dll
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\Costura.xml
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\Waltrip Data Fix.exe.config
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\Waltrip Data Fix.exe.manifest
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\Waltrip Data Fix.application
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\Waltrip Data Fix.exe
+D:\JPS - Template\JurisUtilityBase\bin\x86\Release\Waltrip Data Fix.pdb
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\Waltrip Data Fix.exe.manifest
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\Waltrip Data Fix.application
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\Waltrip Data Fix.exe
+D:\JPS - Template\JurisUtilityBase\obj\x86\Release\Waltrip Data Fix.pdb
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\C1.C1Report.4.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\C1.Win.C1Input.4.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\C1.Win.C1Report.4.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\Costura.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\Gizmox.Extensions.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\Ionic.Zlib.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\JurisAuthenticator.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\JurisDBO21.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\JurisIDef21.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\JurisStr21.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\JurisStr221.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\JurisSVR21.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\Costura.xml
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.AssemblyReference.cache
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.ResolveComReference.cache
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.UtilityBaseMain.resources
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.Properties.Resources.resources
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.SplashScreen.resources
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.GenerateResource.cache
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.CoreCompileInputs.cache
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.Fody.CopyLocal.cache
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.CopyComplete
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\Interop.DDActiveReports2.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\ActiveReports.PdfExport.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\ActiveReports.Document.dll
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.exe.config
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.exe.manifest
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.application
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.exe
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.pdb
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.exe.manifest
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.application
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.exe
+C:\Users\haddocdx\Desktop\JBills Print Tool\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.pdb
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.exe.config
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.exe.manifest
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.application
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.exe
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.pdb
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\ActiveReports.PdfExport.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\Costura.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\Gizmox.Extensions.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\Ionic.Zlib.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\JurisAuthenticator.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\JurisDBO21.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\JurisIDef21.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\JurisStr21.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\JurisStr221.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\JurisSVR21.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\ActiveReports.Document.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\C1.Win.C1Input.4.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\C1.C1Report.4.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\C1.Win.C1Report.4.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\bin\x86\Release\Costura.xml
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.AssemblyReference.cache
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\Interop.DDActiveReports2.dll
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.ResolveComReference.cache
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.UtilityBaseMain.resources
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.Properties.Resources.resources
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.SplashScreen.resources
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.GenerateResource.cache
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.CoreCompileInputs.cache
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.Fody.CopyLocal.cache
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.exe.manifest
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.application
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.CopyComplete
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.exe
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.pdb
+D:\JBills-Print-Tool-main\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.TrustInfo.xml
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.exe.config
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.exe.manifest
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.application
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.exe
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JPS - Archive Bill Bulk Print Tool.pdb
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\Costura.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\Gizmox.Extensions.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\Ionic.Zlib.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JurisAuthenticator.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JurisDBO21.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JurisIDef21.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JurisStr21.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JurisStr221.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JurisSVR21.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\JurisWrapper.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\C1.Win.C1Input.4.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\C1.C1Report.4.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\C1.Win.C1Report.4.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\Costura.xml
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.AssemblyReference.cache
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.ResolveComReference.cache
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.UtilityBaseMain.resources
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.Properties.Resources.resources
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.SplashScreen.resources
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.GenerateResource.cache
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.CoreCompileInputs.cache
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.Fody.CopyLocal.cache
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.TrustInfo.xml
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.exe.manifest
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.application
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JurisUtilityBase.csproj.CopyComplete
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.exe
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\obj\x86\Release\JPS - Archive Bill Bulk Print Tool.pdb
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\ActiveReports.Document.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\ActiveReports.PdfExport.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\ActiveReports.Viewer6.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\ActiveReports6.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\FarPoint.Win.Spread.dll
+D:\JBills-Print-Tool-main-main\JurisUtilityBase\bin\x86\Release\FarPoint.Win.dll
