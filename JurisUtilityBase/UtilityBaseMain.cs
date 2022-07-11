@@ -12,7 +12,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
-using JurisWrapper;
+//using JurisWrapper;
 
 
 
@@ -123,6 +123,49 @@ namespace JurisUtilityBase
         private void DoDaFix()
         {
 
+        }
+
+
+        private void decompxml()
+        {
+            JBillsUtility jbills = new JBillsUtility();
+            jbills.SetInstance(CompanyCode);
+            JurisDbName = jbills.Company.DatabaseName;
+            JBillsDbName = "JBills" + jbills.Company.Code;
+            jbills.OpenDatabase();
+            byte[] input = null;
+            if (jbills.DbOpen)
+            {
+                ///GetFieldLengths();
+            }
+            string sql1 = "select BASImage from BillArchiveSegment where BASInvoiceNbr = 440103";
+            DataSet ds = jbills.RecordsetFromSQL(sql1);
+            if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
+                MessageBox.Show("This Juris database has no archive bill images", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    input = (byte[])dr[0];
+
+
+                }
+                ds.Clear();
+
+                jbills.CloseDatabase();
+
+                
+            }
+            string functionReturnValue = null;
+            
+            byte[] bytDest = null;
+            TCompress objCompress = new TCompress();
+            objCompress.UncompressMemToMem(input, ref bytDest);
+            functionReturnValue = System.Text.Encoding.Default.GetString(bytDest);
+
+
+            objCompress = null;
+            Clipboard.SetText(functionReturnValue);
         }
 
 
@@ -251,16 +294,18 @@ namespace JurisUtilityBase
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            //decompxml();
+           // MessageBox.Show(Clipboard.GetText());
             errors.Clear();
             badBills.Clear();
             richTextBox1.Text = "";
             if (verifyBoxes())
             {
-                UpdateStatus("Gathering Information...", 0, 3);
+                UpdateStatus("Gathering Information...(This could take several minutes)", 0, 3);
                 List<Bill> bills = getBills().ToList();
                 int total = bills.Count;
                 int runningTotal = 1;
+                UpdateStatus("Gathering Information...(This could take several minutes)", 3, 3);
                 foreach (Bill bb1 in bills)
                 {
                     if (!bb1.badBill)
@@ -281,7 +326,9 @@ namespace JurisUtilityBase
                             }
 
                         }
-                        catch (Exception ccs) { errors.Add(bb1.billNo.ToString() + " encounter an error: " + ccs.Message); }
+                        catch (Exception ccs) { errors.Add(bb1.billNo.ToString() + " encounter an error: " + ccs.Message);
+                            System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ccs.InnerException).Throw();
+                        }
                     }
                     UpdateStatus("Converting Invoices...", runningTotal, total);
                     runningTotal++;
@@ -413,7 +460,7 @@ namespace JurisUtilityBase
             endingWhere = endingWhere.Substring(0, endingWhere.Length - "and".Length);
             sql = sql + endingWhere + " order by arbillnbr";
 
-            UpdateStatus("Gathering Information...", 1, 3);
+            UpdateStatus("Gathering Information...(This could take several minutes)", 1, 3);
             Bill bill = null;
             //now get the bills
             DataSet ds = _jurisUtility.RecordsetFromSQL(sql);
@@ -454,7 +501,7 @@ namespace JurisUtilityBase
 
                     }
                     ds.Clear();
-                    UpdateStatus("Gathering Information...", 2, 3);
+                    UpdateStatus("Gathering Information...(This could take several minutes)", 2, 3);
                     //now that we have all the bills, see which ones arent valid and mark them
                     foreach (Bill bb in bills)
                     {
@@ -507,7 +554,7 @@ namespace JurisUtilityBase
 
 
             }
-            UpdateStatus("Gathering Information...", 3, 3);
+            
             return bills;
         }
 
@@ -639,72 +686,19 @@ namespace JurisUtilityBase
             Clipboard.SetText(richTextBox1.Text);
         }
 
-        private static Wrapper _jurisWrapper = null;
+        private static NewWrapper _jurisWrapper = null;
 
-        private Wrapper JurisWrapper
+        private NewWrapper JurisWrapper
         {
-            get { return _jurisWrapper ?? (_jurisWrapper = new Wrapper()); }
+            get { return _jurisWrapper ?? (_jurisWrapper = new NewWrapper()); }
         }
-
-        public void GetBillImage2(string billNumber, string finalPath)
-        {
-
-            try
-            {
-                Wrapper wrapper = new Wrapper();
-                if (!wrapper.LogonCompany(CompanyCode.Replace("Company", "")))
-                {
-                    MessageBox.Show("Unable to view bill image.  Please verify that the company is properly licensed. ");
-                    this.Close();
-                }
-                else
-                {
-
-                    try
-                    {
-                        var result = wrapper.GetBillImage(Convert.ToInt32(billNumber), finalPath);
-                        Cursor = Cursors.Default;
-
-                        if (result == -1)
-                        {
-                            var errorMessage = String.Format("Unable to open archive image for bill number {0}.",
-                                billNumber);
-                            errors.Add(errorMessage);
-                        }
-                        else if (result == 9)
-                        {
-                            errors.Add("There is no archive image for bill number");
-                        }
-                        else
-                        {
-
-                        }
-
-                        if (Marshal.IsComObject(wrapper))
-                        {
-                            while (Marshal.ReleaseComObject(wrapper) > 0) ;
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        errors.Add(exception.Message + " : " + billNumber + " : " + finalPath);
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                errors.Add(exc.Message + " : " + billNumber + " : " + finalPath);
-
-            }
-        }
-
 
 
         public void GetBillImage1(string billNumber, string finalPath)
         {
             try
             {
-                Wrapper wrapper = null;
+                NewWrapper wrapper = null;
                 try
                 {
                     wrapper = JurisWrapper;
@@ -757,12 +751,17 @@ namespace JurisUtilityBase
                         {
                             errors.Add(String.Format("There is no archive image for bill number {0}", billNumber));
                         }
-                        else
+                        else if (wrapper.WrapperException != null)//if the catch wasnt trripped but the wrapper threw an error on its end...get it
                         {
-                            //var proc = new Process { EnableRaisingEvents = false, StartInfo = { FileName = path } };
-                            //proc.Start();
+                            if (wrapper.WrapperException.Message.IndexOf("juriswrapper.log", StringComparison.OrdinalIgnoreCase) >= 0)
+                                errors.Add("Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired");
+                            else if (wrapper.WrapperException.Message.IndexOf("File already open", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                wrapper.WrapperException.Message.IndexOf("Bad file mode", StringComparison.OrdinalIgnoreCase) >= 0)
+                                errors.Add("Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired");
+                            else
+                                errors.Add("Bill Number: " + billNumber + " could not be accessed because " + wrapper.WrapperException.Message);
+                            wrapper.WrapperException = null;
                         }
-
                         if (Marshal.IsComObject(wrapper))
                         {
                             while (Marshal.ReleaseComObject(wrapper) > 0) ;
@@ -775,10 +774,14 @@ namespace JurisUtilityBase
                         {
                             errorMessage += " " + wrapper.WrapperException.Message;
 
-                            if (errorMessage.IndexOf("juriswrapper.log", StringComparison.OrdinalIgnoreCase) >= 0)
+                            if (wrapper.WrapperException.Message.IndexOf("juriswrapper.log", StringComparison.OrdinalIgnoreCase) >= 0)
+                                errors.Add("Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired");
+                            else if (wrapper.WrapperException.Message.IndexOf("File already open", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                wrapper.WrapperException.Message.IndexOf("Bad file mode", StringComparison.OrdinalIgnoreCase) >= 0)
                                 errors.Add("Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired");
                             else
                                 errors.Add("Bill Number: " + billNumber + " could not be accessed because " + errorMessage);
+                            wrapper.WrapperException = null;
                             Cursor = Cursors.Default;
                         }
                     }

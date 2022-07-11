@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>JurisUtilityBase</RootNamespace>
     <AssemblyName>JPS - Archive Bill Bulk Print Tool</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
     </SccProjectName>
@@ -34,7 +34,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -49,6 +49,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,6 +59,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>newLogo.ico</ApplicationIcon>
@@ -124,9 +126,9 @@
     <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
     </Reference>
-    <Reference Include="Gizmox.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Gizmox.Extensions, Version=2.72.0.10, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\Gizmox.Extensions.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Juris\bin\Gizmox.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zlib, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -134,31 +136,26 @@
     </Reference>
     <Reference Include="JurisAuthenticator, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\JurisAuthenticator.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Juris\bin\JurisAuthenticator.dll</HintPath>
     </Reference>
-    <Reference Include="JurisDBO21, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="JurisDBO21, Version=2.72.0.10, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\JurisDBO21.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Juris\bin\JurisDBO21.dll</HintPath>
     </Reference>
-    <Reference Include="JurisIDef21, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="JurisIDef21, Version=2.72.0.10, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\JurisIDef21.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Juris\bin\JurisIDef21.dll</HintPath>
     </Reference>
-    <Reference Include="JurisStr21, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\JurisStr21.dll</HintPath>
+    <Reference Include="JurisStr21">
+      <HintPath>C:\Program Files (x86)\Juris\bin\JurisStr21.dll</HintPath>
     </Reference>
-    <Reference Include="JurisStr221, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="JurisStr221, Version=2.72.0.10, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\JurisStr221.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Juris\bin\JurisStr221.dll</HintPath>
     </Reference>
-    <Reference Include="JurisSVR21, Version=2.6.2.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="JurisSVR21, Version=2.72.0.10, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\JurisSVR21.dll</HintPath>
-    </Reference>
-    <Reference Include="JurisWrapper, Version=3.22.0.4, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Juris\Joel\JurisWrapper\bin\Release\JurisWrapper.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Juris\bin\JurisSVR21.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -176,6 +173,7 @@
     <Compile Include="ExpAttachment.cs" />
     <Compile Include="JBillsUtility.cs" />
     <Compile Include="JurisUtility.cs" />
+    <Compile Include="NewWrapper.cs" />
     <Compile Include="UtilityBaseMain.cs">
       <SubType>Form</SubType>
     </Compile>
