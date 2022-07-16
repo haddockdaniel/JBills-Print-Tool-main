@@ -57,7 +57,10 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBoxBalance = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.checkBoxExpense = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
@@ -66,9 +69,8 @@
             this.labelCurrentStatus = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.labelPercentComplete = new System.Windows.Forms.Label();
-            this.checkBoxBalance = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.rbAND = new System.Windows.Forms.RadioButton();
+            this.rbOR = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.JurisLogoImageBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LexisNexisLogoPictureBox)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -292,7 +294,8 @@
             this.textBoxNaming.Name = "textBoxNaming";
             this.textBoxNaming.Size = new System.Drawing.Size(344, 20);
             this.textBoxNaming.TabIndex = 36;
-            this.textBoxNaming.Text = "[ClientNum]-[MatterNum]-[BillNum].pdf";
+            this.textBoxNaming.Text = "[BillNum]-[ClientNum]-[MatterNum].pdf";
+            this.textBoxNaming.TextChanged += new System.EventHandler(this.textBoxNaming_TextChanged);
             // 
             // label2
             // 
@@ -339,6 +342,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.rbOR);
+            this.groupBox2.Controls.Add(this.rbAND);
             this.groupBox2.Controls.Add(this.checkBoxBalance);
             this.groupBox2.Controls.Add(this.checkBoxByDate);
             this.groupBox2.Controls.Add(this.textBoxDate1);
@@ -358,6 +363,18 @@
             this.groupBox2.Text = "Step 2: Select Bills to Print";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // checkBoxBalance
+            // 
+            this.checkBoxBalance.AutoSize = true;
+            this.checkBoxBalance.Enabled = false;
+            this.checkBoxBalance.Location = new System.Drawing.Point(6, 114);
+            this.checkBoxBalance.Name = "checkBoxBalance";
+            this.checkBoxBalance.Size = new System.Drawing.Size(196, 17);
+            this.checkBoxBalance.TabIndex = 35;
+            this.checkBoxBalance.Text = "Only Export Invoices with a Balance";
+            this.checkBoxBalance.UseVisualStyleBackColor = true;
+            this.checkBoxBalance.CheckedChanged += new System.EventHandler(this.checkBoxBalance_CheckedChanged);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label4);
@@ -372,6 +389,28 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Optional Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(18, 138);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(485, 13);
+            this.label4.TabIndex = 40;
+            this.label4.Text = "* Expense attachments will export with the naming convention above then a dash, t" +
+    "hen their file name";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(18, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(439, 13);
+            this.label3.TabIndex = 39;
+            this.label3.Text = "* Illegal file name characters will automatically be removed (for example: %, *, " +
+    "/, \\, #, @, etc)";
             // 
             // checkBoxExpense
             // 
@@ -454,40 +493,31 @@
             this.labelPercentComplete.TabIndex = 0;
             this.labelPercentComplete.Text = "% Complete";
             // 
-            // checkBoxBalance
+            // rbAND
             // 
-            this.checkBoxBalance.AutoSize = true;
-            this.checkBoxBalance.Checked = true;
-            this.checkBoxBalance.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxBalance.Enabled = false;
-            this.checkBoxBalance.Location = new System.Drawing.Point(6, 114);
-            this.checkBoxBalance.Name = "checkBoxBalance";
-            this.checkBoxBalance.Size = new System.Drawing.Size(196, 17);
-            this.checkBoxBalance.TabIndex = 35;
-            this.checkBoxBalance.Text = "Only Export Invoices with a Balance";
-            this.checkBoxBalance.UseVisualStyleBackColor = true;
+            this.rbAND.AutoSize = true;
+            this.rbAND.ForeColor = System.Drawing.Color.Red;
+            this.rbAND.Location = new System.Drawing.Point(279, 113);
+            this.rbAND.Name = "rbAND";
+            this.rbAND.Size = new System.Drawing.Size(48, 17);
+            this.rbAND.TabIndex = 36;
+            this.rbAND.TabStop = true;
+            this.rbAND.Text = "AND";
+            this.rbAND.UseVisualStyleBackColor = true;
+            this.rbAND.Visible = false;
             // 
-            // label3
+            // rbOR
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(18, 53);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(439, 13);
-            this.label3.TabIndex = 39;
-            this.label3.Text = "* Illegal file name characters will automatically be removed (for example: %, *, " +
-    "/, \\, #, @, etc)";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(18, 138);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(485, 13);
-            this.label4.TabIndex = 40;
-            this.label4.Text = "* Expense attachments will export with the naming convention above then a dash, t" +
-    "hen their file name";
+            this.rbOR.AutoSize = true;
+            this.rbOR.ForeColor = System.Drawing.Color.Red;
+            this.rbOR.Location = new System.Drawing.Point(397, 114);
+            this.rbOR.Name = "rbOR";
+            this.rbOR.Size = new System.Drawing.Size(41, 17);
+            this.rbOR.TabIndex = 37;
+            this.rbOR.TabStop = true;
+            this.rbOR.Text = "OR";
+            this.rbOR.UseVisualStyleBackColor = true;
+            this.rbOR.Visible = false;
             // 
             // UtilityBaseMain
             // 
@@ -576,6 +606,8 @@
         private System.Windows.Forms.CheckBox checkBoxBalance;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RadioButton rbOR;
+        private System.Windows.Forms.RadioButton rbAND;
     }
 }
 

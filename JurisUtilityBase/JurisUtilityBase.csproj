@@ -170,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bill.cs" />
+    <Compile Include="ExecutionClass.cs" />
     <Compile Include="ExpAttachment.cs" />
     <Compile Include="JBillsUtility.cs" />
     <Compile Include="JurisUtility.cs" />

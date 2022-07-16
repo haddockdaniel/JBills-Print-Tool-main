@@ -12,7 +12,8 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
-//using JurisWrapper;
+using System.Threading;
+using System.Threading.Tasks;
 
 
 
@@ -34,7 +35,6 @@ namespace JurisUtilityBase
 
         JurisUtility _jurisUtility;
 
-        List<string> errors = new List<string>();
         List<Bill> badBills = new List<Bill>();
 
 
@@ -124,6 +124,7 @@ namespace JurisUtilityBase
         {
 
         }
+
 
 
         private void decompxml()
@@ -292,53 +293,66 @@ namespace JurisUtilityBase
         }
         #endregion
 
+
+        //private static NewWrapper _jurisWrapper = null;
+
+       // private NewWrapper JurisWrapper
+      //  {
+       //     get { return _jurisWrapper ?? (_jurisWrapper = new NewWrapper()); }
+      //  }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //decompxml();
-           // MessageBox.Show(Clipboard.GetText());
-            errors.Clear();
+            // MessageBox.Show(Clipboard.GetText());
+            //to stop them from trying to change anything once they click run
+            checkBoxBalance.Enabled = false;
+            checkBoxByCliMat.Enabled = false;
+            checkBoxByDate.Enabled = false;
+            checkBoxByNumber.Enabled = false;
+            checkBoxExpense.Enabled = false;
+            textBoxDate1.Enabled = false;
+            textBoxDate2.Enabled = false;
+            textBoxNaming.Enabled = false;
+            textBoxNum1.Enabled = false;
+            textBoxNum2.Enabled = false;
+            rbAND.Enabled = false;
+            rbOR.Enabled = false;
+            button1.Enabled = false;
+            button2.Enabled = false;
+            buttonBrowse.Enabled = false;
+            buttonReport.Enabled = false;
             badBills.Clear();
             richTextBox1.Text = "";
             if (verifyBoxes())
             {
                 UpdateStatus("Gathering Information...(This could take several minutes)", 0, 3);
-                List<Bill> bills = getBills().ToList();
-                int total = bills.Count;
-                int runningTotal = 1;
-                UpdateStatus("Gathering Information...(This could take several minutes)", 3, 3);
-                foreach (Bill bb1 in bills)
+                List<List<Bill>> bills = getBills().ToList().partition(100);
+                var billArray = bills.ToArray();
+                int total = bills.SelectMany(list => list).Distinct().Count();
+                bills.Clear();
+                int runningTotal = 0;
+                int numOfArrays = billArray.Count();
+                //foreach (List<Bill> bbouter in bills)
+                UpdateStatus("Converting Invoices...", runningTotal, total);
+                for (int i = 0; i<numOfArrays; i++)
                 {
-                    if (!bb1.badBill)
-                    {
-                        try
-                        {
-                            string finalPath = Path.Combine(path, getFileName(bb1));
-
-                            GetBillImage1(bb1.billNo.ToString(), finalPath);
-                            if (bb1.hasExpAttach && checkBoxExpense.Checked)
-                            {
-                                foreach (ExpAttachment eex in bb1.exps)
-                                {
-                                    string expPath = finalPath.Replace(".pdf", "");
-                                    expPath = expPath + "-" + eex.fileName;
-                                    File.WriteAllBytes(expPath, eex.fileData);
-                                }
-                            }
-
-                        }
-                        catch (Exception ccs) { errors.Add(bb1.billNo.ToString() + " encounter an error: " + ccs.Message);
-                            System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ccs.InnerException).Throw();
-                        }
-                    }
-                    UpdateStatus("Converting Invoices...", runningTotal, total);
-                    runningTotal++;
+                    
+                    ExecutionClass exec = new ExecutionClass();
+                        exec.DragonsBreath(CompanyCode.Replace("Company", ""), billArray[i].ToList(), textBoxNaming.Text, path, checkBoxExpense.Checked);
+                        exec.Dispose();
+                        runningTotal = runningTotal + 100;
+                        UpdateStatus("Converting Invoices...", runningTotal, total);
+                        billArray[i].Clear();
                 }
+
+
 
 
                 UpdateStatus("Process Complete!", total, total);
                 foreach (Bill bb2 in badBills)
-                    errors.Add("There is no archive image for bill number " + bb2.billNo);
-                if (errors.Count == 0)
+                    richTextBox1.Text = richTextBox1.Text + "There is no archive image for bill number " + bb2.billNo + "\r\n";
+                if (string.IsNullOrEmpty(richTextBox1.Text))
                 {
                     DialogResult dr = MessageBox.Show("Process completed without error. Do you want to view the files?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
@@ -349,14 +363,29 @@ namespace JurisUtilityBase
                     DialogResult dr = MessageBox.Show("Process completed but there were problems with some" + "\r\n" + "invoices. Do you want to view the error log?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {
-                        foreach (string ss in errors)
-                            richTextBox1.Text = richTextBox1.Text + ss + "\r\n";
                         tabControl1.SelectedIndex = 2;
                     }
 
                 }
 
             }
+            //re-enable all because the process if finished
+            checkBoxBalance.Enabled = true;
+            checkBoxByCliMat.Enabled = true;
+            checkBoxByDate.Enabled = true;
+            checkBoxByNumber.Enabled = true;
+            checkBoxExpense.Enabled = true;
+            textBoxDate1.Enabled = true;
+            textBoxDate2.Enabled = true;
+            textBoxNaming.Enabled = true;
+            textBoxNum1.Enabled = true;
+            textBoxNum2.Enabled = true;
+            rbAND.Enabled = true;
+            rbOR.Enabled = true;
+            button1.Enabled = true;
+            button2.Enabled = true;
+            buttonBrowse.Enabled = true;
+            buttonReport.Enabled = true;
         }
 
         private void buttonReport_Click(object sender, EventArgs e)
@@ -375,6 +404,10 @@ namespace JurisUtilityBase
                 button1.Enabled = true;
             else
                 button1.Enabled = false;
+            checkOperative();
+
+
+
         }
 
         private void checkBoxByNumber_CheckedChanged(object sender, EventArgs e)
@@ -382,20 +415,58 @@ namespace JurisUtilityBase
             textBoxNum1.Visible = checkBoxByNumber.Checked;
             textBoxNum2.Visible = checkBoxByNumber.Checked;
             labelNum.Visible = checkBoxByNumber.Checked;
-            if (checkBoxByDate.Checked || checkBoxByNumber.Checked || checkBoxByCliMat.Checked)
+            if (checkBoxByDate.Checked || checkBoxByNumber.Checked || checkBoxByCliMat.Checked || checkBoxBalance.Checked)
                 button1.Enabled = true;
             else
                 button1.Enabled = false;
+            checkOperative();
         }
 
         private void checkBoxByCliMat_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxByDate.Checked || checkBoxByNumber.Checked || checkBoxByCliMat.Checked)
+            if (checkBoxByDate.Checked || checkBoxByNumber.Checked || checkBoxByCliMat.Checked || checkBoxBalance.Checked)
                 button1.Enabled = true;
             else
                 button1.Enabled = false;
             comboBox1.Visible = checkBoxByCliMat.Checked;
+            checkOperative();
+        }
 
+        private void checkBoxBalance_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxByDate.Checked || checkBoxByNumber.Checked || checkBoxByCliMat.Checked || checkBoxBalance.Checked)
+                button1.Enabled = true;
+            else
+                button1.Enabled = false;
+            checkOperative();
+        }
+
+        private bool checkOperative()
+        {
+            int checks = 0;
+            foreach (Control g in groupBox2.Controls) 
+            {
+                if (g is CheckBox)
+                {
+                    CheckBox cb = (CheckBox)g;
+                        if (cb.Checked)
+                        checks++;
+                }
+                    
+                
+            }
+            if (checks > 1)
+            {
+                rbAND.Visible = true;
+                rbOR.Visible = true;
+                return true;
+            }
+            else
+            {
+                rbAND.Visible = false;
+                rbOR.Visible = false;
+                return false;
+            }
         }
 
         private void buttonBrowse_Click(object sender, EventArgs e)
@@ -421,24 +492,6 @@ namespace JurisUtilityBase
             List<Bill> bills = new List<Bill>();
             string sql = "";
 
-            if (checkBoxBalance.Checked)
-            {
-                sql = "select distinct matsysnbr, clisysnbr,dbo.jfn_FormatClientCode(clicode) as clicode, clireportingname, " +
-                        " dbo.jfn_FormatMatterCode(MatCode) as matcode, matreportingname,arbillnbr, convert(varchar, arbilldate, 101) as BillDate " +
-                        " from armatalloc inner join arbill on arbillnbr = armbillnbr " +
-                        " inner join matter on matsysnbr = armmatter inner join client on clisysnbr = matclinbr " +
-                        " where ARMBalDue <> 0 ";
-
-            }
-            else
-            {
-                sql = "select distinct matsysnbr, clisysnbr,dbo.jfn_FormatClientCode(clicode) as clicode, clireportingname, " +
-                        " dbo.jfn_FormatMatterCode(MatCode) as matcode, matreportingname,arbillnbr, convert(varchar, arbilldate, 101) as BillDate " +
-                        " from ledgerhistory inner join arbill on arbillnbr = lhbillnbr " +
-                        " inner join matter on matsysnbr = lhmatter inner join client on clisysnbr = matclinbr " +
-                        " where lhtype in ('3', '4') and lhbillnbr not in (select lhbillnbr from ledgerhistory where lhtype in ('A', 'B', 'C')) ";
-            }
-
             List<string> whereClauses = new List<string>();
             if (checkBoxByDate.Checked)
                 whereClauses.Add(" arbilldate between '" + textBoxDate1.Text + "' and '" + textBoxDate2.Text + "' ");
@@ -447,18 +500,93 @@ namespace JurisUtilityBase
             if (checkBoxByCliMat.Checked)
                 whereClauses.Add(" dbo.jfn_FormatClientCode(clicode) = '" + this.comboBox1.GetItemText(this.comboBox1.SelectedItem).Split(' ')[0] + "' ");
 
-            string endingWhere = "";
 
 
-
-            if (whereClauses.Count > 0)
+            if (checkBoxBalance.Checked && !checkOperative())
             {
-                endingWhere = " and ";
-                foreach (string clause in whereClauses)
-                    endingWhere = endingWhere + clause + " and";
+                sql = "select distinct matsysnbr, clisysnbr,dbo.jfn_FormatClientCode(clicode) as clicode, clireportingname, " +
+                        " dbo.jfn_FormatMatterCode(MatCode) as matcode, matreportingname,arbillnbr, convert(varchar, arbilldate, 101) as BillDate " +
+                        " from armatalloc inner join arbill on arbillnbr = armbillnbr " +
+                        " inner join matter on matsysnbr = armmatter inner join client on clisysnbr = matclinbr " +
+                        " where ARMBalDue <> 0 ";
+
             }
-            endingWhere = endingWhere.Substring(0, endingWhere.Length - "and".Length);
-            sql = sql + endingWhere + " order by arbillnbr";
+            else if (checkBoxBalance.Checked && checkOperative())
+            {
+                //here if its AND, we have to add clause at end because it applies to both queries in union
+                //if OR, it only applied to LH piece as arm piece needs all records
+                string endingWhere = "";
+                string junction = "";
+                if (rbOR.Checked)
+                   junction = " or ";
+                else
+                    junction = " and ";
+
+                foreach (string clause in whereClauses)
+                    endingWhere = endingWhere + clause + junction;
+                if (endingWhere.EndsWith("and "))
+                    endingWhere = endingWhere.Substring(0, endingWhere.Length - "and ".Length);
+                if (endingWhere.EndsWith("or "))
+                    endingWhere = endingWhere.Substring(0, endingWhere.Length - "or ".Length);
+
+                if (rbOR.Checked)//or (they can have a balance OR meet some other criteria)
+                {
+
+                    sql = "select distinct matsysnbr, clisysnbr, clicode, clireportingname, matcode, matreportingname,arbillnbr, BillDate from ( " +
+                        "select distinct matsysnbr, clisysnbr,dbo.jfn_FormatClientCode(clicode) as clicode, clireportingname, " +
+                            " dbo.jfn_FormatMatterCode(MatCode) as matcode, matreportingname,arbillnbr, convert(varchar, arbilldate, 101) as BillDate " +
+                            " from armatalloc inner join arbill on arbillnbr = armbillnbr " +
+                            " inner join matter on matsysnbr = armmatter inner join client on clisysnbr = matclinbr " +
+                            " where ARMBalDue <> 0 " +
+                            " union all " +
+                            " select distinct matsysnbr, clisysnbr,dbo.jfn_FormatClientCode(clicode) as clicode, clireportingname, " +
+                            " dbo.jfn_FormatMatterCode(MatCode) as matcode, matreportingname,arbillnbr, convert(varchar, arbilldate, 101) as BillDate " +
+                            " from ledgerhistory inner join arbill on arbillnbr = lhbillnbr " +
+                            " inner join matter on matsysnbr = lhmatter inner join client on clisysnbr = matclinbr " +
+                            " where  (" + endingWhere + " ) and lhtype in ('3', '4') and lhbillnbr not in (select lhbillnbr from ledgerhistory where lhtype in ('A', 'B', 'C'))" +
+                            " ) ffc ";
+                }
+                else // and (they MUST have a balance and some other criteria)
+                {
+                    sql =  "select distinct matsysnbr, clisysnbr,dbo.jfn_FormatClientCode(clicode) as clicode, clireportingname, " +
+                            " dbo.jfn_FormatMatterCode(MatCode) as matcode, matreportingname,arbillnbr, convert(varchar, arbilldate, 101) as BillDate " +
+                            " from armatalloc inner join arbill on arbillnbr = armbillnbr " +
+                            " inner join matter on matsysnbr = armmatter inner join client on clisysnbr = matclinbr " +
+                            " where ARMBalDue <> 0 and " + endingWhere;
+                }
+            }
+            else
+            {
+                string endingWhere = "";
+
+                string junction = " and ";
+
+                if (whereClauses.Count > 0) //we only care if OR is checked...every other path is AND
+                {
+                    if (rbAND.Visible && rbOR.Checked)
+                    {
+                        junction = " or ";
+                    }
+
+                    endingWhere = " and ";
+                    foreach (string clause in whereClauses)
+                        endingWhere = endingWhere + clause + junction;
+                    if (endingWhere.EndsWith("and "))
+                        endingWhere = endingWhere.Substring(0, endingWhere.Length - "and ".Length);
+                    if (endingWhere.EndsWith("or "))
+                        endingWhere = endingWhere.Substring(0, endingWhere.Length - "or ".Length);
+                }
+
+                sql = "select distinct matsysnbr, clisysnbr,dbo.jfn_FormatClientCode(clicode) as clicode, clireportingname, " +
+                        " dbo.jfn_FormatMatterCode(MatCode) as matcode, matreportingname,arbillnbr, convert(varchar, arbilldate, 101) as BillDate " +
+                        " from ledgerhistory inner join arbill on arbillnbr = lhbillnbr " +
+                        " inner join matter on matsysnbr = lhmatter inner join client on clisysnbr = matclinbr " +
+                        " where lhtype in ('3', '4') and lhbillnbr not in (select lhbillnbr from ledgerhistory where lhtype in ('A', 'B', 'C')) " + endingWhere;
+            }
+
+            sql = sql + " order by arbillnbr";
+
+            //MessageBox.Show(sql);
 
             UpdateStatus("Gathering Information...(This could take several minutes)", 1, 3);
             Bill bill = null;
@@ -554,7 +682,7 @@ namespace JurisUtilityBase
 
 
             }
-            
+            UpdateStatus("Gathering Information...(This could take several minutes)", 3, 3);
             return bills;
         }
 
@@ -582,7 +710,11 @@ namespace JurisUtilityBase
                 MessageBox.Show("The naming convention is incorrect", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-
+            if (checkOperative() && (!rbAND.Checked && !rbOR.Checked))
+            {
+                MessageBox.Show("When selecting more than one checkbox, AND or OR must be selected", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             return true;
         }
 
@@ -686,50 +818,16 @@ namespace JurisUtilityBase
             Clipboard.SetText(richTextBox1.Text);
         }
 
-        private static NewWrapper _jurisWrapper = null;
 
-        private NewWrapper JurisWrapper
+
+
+        public void GetBillImage1(string billNumber, string finalPath, NewWrapper wrapper)
         {
-            get { return _jurisWrapper ?? (_jurisWrapper = new NewWrapper()); }
-        }
-
-
-        public void GetBillImage1(string billNumber, string finalPath)
-        {
+            
             try
             {
-                NewWrapper wrapper = null;
-                try
-                {
-                    wrapper = JurisWrapper;
-                }
-                catch (Exception exception)
-                {
-                    var errorMessage = exception.Message;
-                    if (wrapper != null && wrapper.WrapperException != null)
-                    {
-                        errorMessage += " " + wrapper.WrapperException.Message;
-                    }
-                    MessageBox.Show("Unable to view bill image...null wrapper: " + errorMessage,
-    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
-                }
-                if (wrapper == null)
-                {
-                    MessageBox.Show("Unable to view bill image...null wrapper",
-                        Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
-                    Cursor = Cursors.Default;
-                }
-                else if (!wrapper.LogonCompany(CompanyCode.Replace("Company", "")))
-                {
-                    MessageBox.Show(string.Format("Unable to view bill image.  Please verify that the company is properly licensed. {0}", wrapper.WrapperException != null ? wrapper.WrapperException.Message : string.Empty),
-                        Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
-                    Cursor = Cursors.Default;
-                }
-                else
-                {
+
+
 
 
                     try
@@ -745,27 +843,30 @@ namespace JurisUtilityBase
                             {
                                 errorMessage += " " + wrapper.WrapperException.Message;
                             }
-                            errors.Add(errorMessage);
+                            richTextBox1.Text = richTextBox1.Text + errorMessage + "\r\n";
+                            //wrapper = null;
                         }
                         else if (result == 9)
                         {
-                            errors.Add(String.Format("There is no archive image for bill number {0}", billNumber));
+                            richTextBox1.Text = richTextBox1.Text + String.Format("There is no archive image for bill number {0}", billNumber) + "\r\n";
+                            //wrapper = null;
                         }
                         else if (wrapper.WrapperException != null)//if the catch wasnt trripped but the wrapper threw an error on its end...get it
                         {
                             if (wrapper.WrapperException.Message.IndexOf("juriswrapper.log", StringComparison.OrdinalIgnoreCase) >= 0)
-                                errors.Add("Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired");
+                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired" + "\r\n";
                             else if (wrapper.WrapperException.Message.IndexOf("File already open", StringComparison.OrdinalIgnoreCase) >= 0 ||
                                 wrapper.WrapperException.Message.IndexOf("Bad file mode", StringComparison.OrdinalIgnoreCase) >= 0)
-                                errors.Add("Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired");
+                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired" + "\r\n";
                             else
-                                errors.Add("Bill Number: " + billNumber + " could not be accessed because " + wrapper.WrapperException.Message);
+                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " could not be accessed because " + wrapper.WrapperException.Message + "\r\n";
                             wrapper.WrapperException = null;
+                            //wrapper = null;
                         }
-                        if (Marshal.IsComObject(wrapper))
-                        {
-                            while (Marshal.ReleaseComObject(wrapper) > 0) ;
-                        }
+                       // if (Marshal.IsComObject(wrapper))
+                       // {
+                       //     while (Marshal.ReleaseComObject(wrapper) > 0) ;
+                      // }
                     }
                     catch (Exception exception)
                     {
@@ -775,34 +876,50 @@ namespace JurisUtilityBase
                             errorMessage += " " + wrapper.WrapperException.Message;
 
                             if (wrapper.WrapperException.Message.IndexOf("juriswrapper.log", StringComparison.OrdinalIgnoreCase) >= 0)
-                                errors.Add("Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired");
+                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired" + "\r\n";
                             else if (wrapper.WrapperException.Message.IndexOf("File already open", StringComparison.OrdinalIgnoreCase) >= 0 ||
                                 wrapper.WrapperException.Message.IndexOf("Bad file mode", StringComparison.OrdinalIgnoreCase) >= 0)
-                                errors.Add("Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired");
+                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired" + "\r\n";
                             else
-                                errors.Add("Bill Number: " + billNumber + " could not be accessed because " + errorMessage);
+                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " could not be accessed because " + errorMessage + "\r\n";
                             wrapper.WrapperException = null;
                             Cursor = Cursors.Default;
+                            //wrapper = null;
                         }
                     }
-                }
+                
+                //wrapper = null;
+                //wrapper.IDisposable_Dispose();
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message, "Error retrieving bill image outer catch", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Cursor = Cursors.Default;
             }
+            
         }
-
-
-
-
-
-
 
         private void checkBoxExpense_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBoxNaming_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+    }
+
+    public static class Extensions
+    {
+        public static List<List<T>> partition<T>(this List<T> values, int chunkSize)
+        {
+            return values.Select((x, i) => new { Index = i, Value = x })
+                .GroupBy(x => x.Index / chunkSize)
+                .Select(x => x.Select(v => v.Value).ToList())
+                .ToList();
         }
     }
 }

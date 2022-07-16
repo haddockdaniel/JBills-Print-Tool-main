@@ -10,6 +10,8 @@ using Gizmox.Extensions;
 using Gizmox.Controls;
 using Gizmox.CSharp;
 using Gizmox.RC;
+using System.Collections.Generic;
+using System.IO;
 
 namespace JurisUtilityBase
 {
@@ -95,6 +97,7 @@ namespace JurisUtilityBase
 			{
 				WrapperException = exception;
 				Gizmox.CSharp.Information.Err().Clear();
+				MessageBox.Show("LError " + exception.Message);
 				return false;
 			}
 
@@ -121,6 +124,70 @@ namespace JurisUtilityBase
 
 		}
 
+
+		public void logOnAndDoWork(string company,List<Bill> BList, string textBox, string path, bool processExpense)
+        {
+			if (LogonCompany(company))
+			{
+				foreach (Bill bb1 in BList)
+				{
+					if (!bb1.badBill)
+					{
+						try
+						{
+							string finalPath = Path.Combine(path, getFileName(bb1, textBox));
+							if (!File.Exists(finalPath))
+								GetBillImage(Convert.ToInt32(bb1.billNo.ToString()), finalPath);
+							if (bb1.hasExpAttach && processExpense)
+							{
+								foreach (ExpAttachment eex in bb1.exps)
+								{
+									string expPath = finalPath.Replace(".pdf", "");
+									expPath = expPath + "-" + eex.fileName;
+									if (!File.Exists(expPath))
+										File.WriteAllBytes(expPath, eex.fileData);
+								}
+							}
+
+						}
+						catch (Exception ccs)
+						{
+							WrapperException = ccs;
+							Gizmox.CSharp.Information.Err().CaptureException(ccs);
+							ErrLog(Information.Err().Number.ToString(CultureInfo.InvariantCulture), Information.Err().Description, string.Format("getbillimage:{0}", Gizmox.CSharp.Information.Err().Source));
+							Gizmox.CSharp.Information.Err().Clear();
+							throw;
+						}
+					}
+
+				}
+
+			}
+			else
+            {
+				MessageBox.Show("LogOnError");
+            }
+
+		}
+
+		private string getFileName(Bill bb, string textBox)
+		{
+			string output = textBox.Replace(".pdf", "");
+			output = output.Replace("pdf", "");
+
+			output = output.Replace("[ClientNum]", bb.clientNo);
+			output = output.Replace("[MatterNum]", bb.matterNo);
+			output = output.Replace("[ClientName]", bb.clientName);
+			output = output.Replace("[MatterName]", bb.matterName);
+			output = output.Replace("[BillNum]", bb.billNo.ToString());
+			output = output.Replace("[BillDate]", bb.billDate.Replace("/", "-"));
+			output = output.Replace("[Clisys]", bb.clisys.ToString());
+			output = output.Replace("[Matsys]", bb.matsys.ToString());
+			output = output.Replace("[NowDate]", DateTime.Now.ToString("MM/dd/yyyy").Replace("/", "-"));
+			output = output.Replace("[NowTime]", DateTime.Now.ToString("MM/dd/yyyy hh:mm tt").Replace("/", "-").Replace(":", " "));
+			output = output + ".pdf";
+			return output;
+		}
 
 
 		/// <summary>
@@ -218,12 +285,19 @@ namespace JurisUtilityBase
 		/// <returns></returns>
 		public object ErrLog(string errNbr, string errDesc, string errSub)
 		{
-			int hFile = FileSystem.FreeFile();
+			try
+			{
+				int hFile = FileSystem.FreeFile();
 
-			FileSystem.FileOpen(hFile, @"c:\Intel\JurisError.log", OpenMode.Append, OpenAccess.Default, OpenShare.Default, -1);
-			FileSystem.Print(hFile, DateAndTime.Now);
-			FileSystem.PrintLine(hFile, string.Format("{0}: {1} - {2}", errNbr, errDesc, errSub));
-			FileSystem.FileClose(hFile);
+				FileSystem.FileOpen(hFile, @"c:\Intel\JurisError.log", OpenMode.Append, OpenAccess.Default, OpenShare.Default, -1);
+				FileSystem.Print(hFile, DateAndTime.Now);
+				FileSystem.PrintLine(hFile, string.Format("{0}: {1} - {2}", errNbr, errDesc, errSub));
+				FileSystem.FileClose(hFile);
+			}
+			catch (Exception vv)
+            {
+				
+            }
 			return default(object);
 		}
 
