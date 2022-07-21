@@ -4,6 +4,7 @@ using System.IO;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
+using System.Collections;
 
 using System.Windows.Forms;
 
@@ -11,8 +12,8 @@ namespace JurisUtilityBase
 {
     public class ExecutionClass : IDisposable
     {
-
-        public void DragonsBreath(string company, List<Bill> bList, string textBox, string path, bool processExpense)
+        public bool fatalError = false;
+        public List<string> DragonsBreath(string company, List<Bill> bList, string textBox, string path, bool processExpense)
         {
             NewWrapper rr = null;
             try
@@ -28,8 +29,9 @@ namespace JurisUtilityBase
                 }
                 MessageBox.Show("Unable to view bill image...null wrapper: " + errorMessage,
             Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                fatalError = true;
             }
-            rr.logOnAndDoWork(company, bList, textBox, path, processExpense);
+            return rr.logOnAndDoWork(company, bList, textBox, path, processExpense);
             //rr.IDisposable_Dispose();
         }
 

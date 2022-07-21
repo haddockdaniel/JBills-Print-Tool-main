@@ -96,8 +96,9 @@ namespace JurisUtilityBase
 			catch (Exception exception)
 			{
 				WrapperException = exception;
+				Gizmox.CSharp.Information.Err().CaptureException(exception);
+				ErrLog(Information.Err().Number.ToString(CultureInfo.InvariantCulture), Information.Err().Description, string.Format("getbillimage:{0}", Gizmox.CSharp.Information.Err().Source));
 				Gizmox.CSharp.Information.Err().Clear();
-				MessageBox.Show("LError " + exception.Message);
 				return false;
 			}
 
@@ -125,8 +126,9 @@ namespace JurisUtilityBase
 		}
 
 
-		public void logOnAndDoWork(string company,List<Bill> BList, string textBox, string path, bool processExpense)
+		public List<string> logOnAndDoWork(string company,List<Bill> BList, string textBox, string path, bool processExpense)
         {
+			List<string> errors = new List<string>();
 			if (LogonCompany(company))
 			{
 				foreach (Bill bb1 in BList)
@@ -156,7 +158,8 @@ namespace JurisUtilityBase
 							Gizmox.CSharp.Information.Err().CaptureException(ccs);
 							ErrLog(Information.Err().Number.ToString(CultureInfo.InvariantCulture), Information.Err().Description, string.Format("getbillimage:{0}", Gizmox.CSharp.Information.Err().Source));
 							Gizmox.CSharp.Information.Err().Clear();
-							throw;
+							errors.Add("Unable to print bill " + bb1.billNo + " because " + ccs.Message);
+							//throw;
 						}
 					}
 
@@ -165,9 +168,9 @@ namespace JurisUtilityBase
 			}
 			else
             {
-				MessageBox.Show("LogOnError");
-            }
-
+				errors.Add("There was an error logging into your books. Check your license");
+			}
+			return errors;
 		}
 
 		private string getFileName(Bill bb, string textBox)
@@ -289,10 +292,10 @@ namespace JurisUtilityBase
 			{
 				int hFile = FileSystem.FreeFile();
 
-				FileSystem.FileOpen(hFile, @"c:\Intel\JurisError.log", OpenMode.Append, OpenAccess.Default, OpenShare.Default, -1);
-				FileSystem.Print(hFile, DateAndTime.Now);
-				FileSystem.PrintLine(hFile, string.Format("{0}: {1} - {2}", errNbr, errDesc, errSub));
-				FileSystem.FileClose(hFile);
+				//FileSystem.FileOpen(hFile, @"c:\Intel\JurisError.log", OpenMode.Append, OpenAccess.Default, OpenShare.Default, -1);
+				//FileSystem.Print(hFile, DateAndTime.Now);
+				//FileSystem.PrintLine(hFile, string.Format("{0}: {1} - {2}", errNbr, errDesc, errSub));
+				//FileSystem.FileClose(hFile);
 			}
 			catch (Exception vv)
             {

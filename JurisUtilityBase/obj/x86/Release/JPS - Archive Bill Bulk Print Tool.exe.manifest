@@ -319,14 +319,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="JPS - Archive Bill Bulk Print Tool.exe" size="1283584">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="JPS - Archive Bill Bulk Print Tool.exe" size="1282048">
       <assemblyIdentity name="JPS - Archive Bill Bulk Print Tool" version="2.71.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UegnjoNKcXvy1bsEtIlkscNoUig0uGIaa2buPKiWZvI=</dsig:DigestValue>
+        <dsig:DigestValue>PzL7mQSGRP09RQefVW5Xq0NSxHFFasLWz8BDoejAmV4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

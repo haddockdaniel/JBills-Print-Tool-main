@@ -339,11 +339,15 @@ namespace JurisUtilityBase
                 {
                     
                     ExecutionClass exec = new ExecutionClass();
-                        exec.DragonsBreath(CompanyCode.Replace("Company", ""), billArray[i].ToList(), textBoxNaming.Text, path, checkBoxExpense.Checked);
+                    List<string> errors = new List<string>();
+                    errors =  exec.DragonsBreath(CompanyCode.Replace("Company", ""), billArray[i].ToList(), textBoxNaming.Text, path, checkBoxExpense.Checked).ToList();
                         exec.Dispose();
-                        runningTotal = runningTotal + 100;
-                        UpdateStatus("Converting Invoices...", runningTotal, total);
-                        billArray[i].Clear();
+                    foreach (string error in errors)
+                        { richTextBox1.Text = richTextBox1.Text + error + "\r\n"; }
+                    runningTotal = runningTotal + 100;
+                    UpdateStatus("Converting Invoices...", runningTotal, total);
+                    billArray[i].Clear();
+                    errors.Clear();
                 }
 
 
@@ -630,7 +634,7 @@ namespace JurisUtilityBase
                     }
                     ds.Clear();
                     UpdateStatus("Gathering Information...(This could take several minutes)", 2, 3);
-                    //now that we have all the bills, see which ones arent valid and mark them
+                    //now that we have all the bills, see which ones arent valid and mark them (do they have a bill image in jbills)
                     foreach (Bill bb in bills)
                     {
                         foreach (DataRow dr in rs.Tables[0].Rows)
@@ -643,33 +647,37 @@ namespace JurisUtilityBase
                         }
                     }
                     jbills.CloseDatabase();
-
-                    string sql2 = "  select name, attachmentobject, bebillnbr from Attachment aa " +
-                                  "  inner join ExpenseEntryAttachment ea on ea.AttachmentID = aa.id " +
-                                  "  inner join expenseEntry ee on ee.entryid = ea.EntryID " +
-                                  "  INNER JOIN  ExpenseEntryLink el ON ee.EntryID = el.EntryID " +
-                                  "  INNER JOIN BilledExpenses be ON el.EBDID = be.beid " +
-                                  "  where AttachmentType = 0";
-                    DataSet fs = _jurisUtility.RecordsetFromSQL(sql2);
-                    foreach (DataRow dr in fs.Tables[0].Rows)
+                    //if they want to print exp attachments, lets grab those and add those to the objects
+                    if (checkBoxExpense.Checked)
                     {
-                        foreach (Bill bb in bills)
+                        string sql2 = "  select name, attachmentobject, bebillnbr from Attachment aa " +
+                                      "  inner join ExpenseEntryAttachment ea on ea.AttachmentID = aa.id " +
+                                      "  inner join expenseEntry ee on ee.entryid = ea.EntryID " +
+                                      "  INNER JOIN  ExpenseEntryLink el ON ee.EntryID = el.EntryID " +
+                                      "  INNER JOIN BilledExpenses be ON el.EBDID = be.beid " +
+                                      "  where AttachmentType = 0";
+                        DataSet fs = _jurisUtility.RecordsetFromSQL(sql2);
+                        foreach (DataRow dr in fs.Tables[0].Rows)
                         {
-                            if (bb.billNo == Convert.ToInt32(dr["bebillnbr"].ToString()))
+                            foreach (Bill bb in bills)
                             {
-                                bb.hasExpAttach = true;
-                                ExpAttachment expattach = new ExpAttachment();
-                                expattach.fileName = dr["name"].ToString();
-                                expattach.fileData = (byte[])dr["attachmentobject"];
-                                bb.exps.Add(expattach);
-                                break;
+                                if (bb.billNo == Convert.ToInt32(dr["bebillnbr"].ToString()))
+                                {
+                                    bb.hasExpAttach = true;
+                                    ExpAttachment expattach = new ExpAttachment();
+                                    expattach.fileName = dr["name"].ToString();
+                                    expattach.fileData = (byte[])dr["attachmentobject"];
+                                    bb.exps.Add(expattach);
+                                    break;
+                                }
                             }
                         }
+
+                        fs.Clear();
                     }
 
-                    fs.Clear();
-
                     _jurisUtility.CloseDatabase();
+                    //cleanup
                     foreach (Bill ba in bills)
                     {
                         if (ba.badBill)
@@ -790,7 +798,7 @@ namespace JurisUtilityBase
             output = output.Replace("[Clisys]", bb.clisys.ToString());
             output = output.Replace("[Matsys]", bb.matsys.ToString());
             output = output.Replace("[NowDate]", DateTime.Now.ToString("MM/dd/yyyy").Replace("/", "-"));
-            output = output.Replace("[NowTime]", DateTime.Now.ToString("MM/dd/yyyy hh:mm tt").Replace("/", "-").Replace(":", " "));
+            output = output.Replace("[NowTime]", DateTime.Now.ToString("MM/dd/yyyy hh:mm tt").Replace("/", "-").Replace(":", ""));
             output = output + ".pdf";
             return output;
         }
@@ -818,86 +826,6 @@ namespace JurisUtilityBase
             Clipboard.SetText(richTextBox1.Text);
         }
 
-
-
-
-        public void GetBillImage1(string billNumber, string finalPath, NewWrapper wrapper)
-        {
-            
-            try
-            {
-
-
-
-
-                    try
-                    {
-                        var result = wrapper.GetBillImage(Convert.ToInt32(billNumber), finalPath);
-                        Cursor = Cursors.Default;
-
-                        if (result == -1)
-                        {
-                            var errorMessage = String.Format("Unable to open archive image for bill number {0}.",
-                                billNumber);
-                            if (wrapper.WrapperException != null)
-                            {
-                                errorMessage += " " + wrapper.WrapperException.Message;
-                            }
-                            richTextBox1.Text = richTextBox1.Text + errorMessage + "\r\n";
-                            //wrapper = null;
-                        }
-                        else if (result == 9)
-                        {
-                            richTextBox1.Text = richTextBox1.Text + String.Format("There is no archive image for bill number {0}", billNumber) + "\r\n";
-                            //wrapper = null;
-                        }
-                        else if (wrapper.WrapperException != null)//if the catch wasnt trripped but the wrapper threw an error on its end...get it
-                        {
-                            if (wrapper.WrapperException.Message.IndexOf("juriswrapper.log", StringComparison.OrdinalIgnoreCase) >= 0)
-                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired" + "\r\n";
-                            else if (wrapper.WrapperException.Message.IndexOf("File already open", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                wrapper.WrapperException.Message.IndexOf("Bad file mode", StringComparison.OrdinalIgnoreCase) >= 0)
-                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired" + "\r\n";
-                            else
-                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " could not be accessed because " + wrapper.WrapperException.Message + "\r\n";
-                            wrapper.WrapperException = null;
-                            //wrapper = null;
-                        }
-                       // if (Marshal.IsComObject(wrapper))
-                       // {
-                       //     while (Marshal.ReleaseComObject(wrapper) > 0) ;
-                      // }
-                    }
-                    catch (Exception exception)
-                    {
-                        var errorMessage = exception.Message;
-                        if (wrapper.WrapperException != null)
-                        {
-                            errorMessage += " " + wrapper.WrapperException.Message;
-
-                            if (wrapper.WrapperException.Message.IndexOf("juriswrapper.log", StringComparison.OrdinalIgnoreCase) >= 0)
-                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired" + "\r\n";
-                            else if (wrapper.WrapperException.Message.IndexOf("File already open", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                wrapper.WrapperException.Message.IndexOf("Bad file mode", StringComparison.OrdinalIgnoreCase) >= 0)
-                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " appears to be in an incorrect format and may need to be repaired" + "\r\n";
-                            else
-                                richTextBox1.Text = richTextBox1.Text + "Bill Number: " + billNumber + " could not be accessed because " + errorMessage + "\r\n";
-                            wrapper.WrapperException = null;
-                            Cursor = Cursors.Default;
-                            //wrapper = null;
-                        }
-                    }
-                
-                //wrapper = null;
-                //wrapper.IDisposable_Dispose();
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message, "Error retrieving bill image outer catch", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Cursor = Cursors.Default;
-            }
-            
-        }
 
         private void checkBoxExpense_CheckedChanged(object sender, EventArgs e)
         {
